@@ -1,7 +1,5 @@
 # Assignment 5: Big Integers
-
-**Name:** Zoe Eigenbrod
-**Language:** C++17
+Zoe Eigenbrod
 
 ## 1. Big Integer Justification
 
