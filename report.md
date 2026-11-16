@@ -1,5 +1,5 @@
 # Assignment 5: Big Integers
-Zoe Eigenbrod
+## Zoe Eigenbrod
 
 ## 1. Big Integer Justification
 
