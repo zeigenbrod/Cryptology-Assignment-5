@@ -5,7 +5,7 @@
 
 I decided to implement my big integer using C++'s `std::vector<uint8_t>`. because it is dynamic and allows you to store individual bytes. 'uint8_t' holds 1 byte, and using a vector allows for adjustments based on the integer size. This is good for multiplication because after the result is calculated, it may need additional space. 
 
-`bigint_init` and `bigint_to_string` are implemented as required, and the main big integer program can be accessed by running `main.cpp`, though the functionality is in `bigint.cpp`. My program throws errors for empty strings, invalid hex values/hex values not being used, oversized strings (over 256 bytes). 
+`bigint_init` and `bigint_to_string` are implemented as required, and the functionality is in `bigint.cpp`. My program throws errors for empty strings, invalid hex values/hex values not being used, oversized strings (over 256 bytes). 
 
 ## 2. Big Integer Multiplication
 
@@ -66,4 +66,4 @@ For the benchmarking, I ran 1000 iterations.
 - **512 bits:** C++ = 8378.69 ns | Python = 1183.94 ns
 - **1024 bits:** C++ = 42165.20 ns | Python = 2753.54 ns
 
-The built-in Python implementation is x12.26 times faster for 256 bits, x7.08 times faster for 512 bits, and x15.31 times faster for 1024 bits. Python was faster because my implementation uses a basic schoolbook multiplication implementation. My algorithm has a time complexity of O(n^2). Python uses Karatsuba multiplicaton, which is generally faster than schoolbook multiplication. The Python Karatsuba multiplcation runs at O(n^1.585).
+The built-in Python implementation is x12.26 times faster for 256 bits, x7.08 times faster for 512 bits, and x15.31 times faster for 1024 bits. Python uses schoolbook multiplcation as well for integers under 70 digits, but it was still much faster than my C++ implementation. 
