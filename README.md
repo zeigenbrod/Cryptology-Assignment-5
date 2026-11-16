@@ -3,7 +3,7 @@
 
 **Zoe Eigenbrod**
 
-**Language:** C++17, Python 3.13.7
+**Language:** C++17 (Apple Clang 15.0.0), Python 3.13.7
 
 ## Files
 

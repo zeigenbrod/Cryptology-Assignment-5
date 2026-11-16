@@ -50,7 +50,7 @@ I then ran the test generator, and did 1000 iterations.
 
 After the generation, I ran the test program against the generated test cases. Since the test_cases.txt file is provided as an arguement, the generated multiplcation tests are tested.
 
-`./test test_cases.txt`
+`./test tests.txt`
 
 `Failures: 0` was the output, so all the tests passed.
 
