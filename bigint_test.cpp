@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -7,10 +6,7 @@
 
 #include "bigint.h"
 
-using std::string;
-using std::vector;
-using std::cout;
-using std::cerr;
+using std::string, std::vector, std::cout, std::cerr;
 
 int failures = 0;
 
@@ -25,57 +21,57 @@ void check(bool passed, string message) {
 }
 
 void test_init() {
-    check(bigint_to_string(bigint_init("0")) == "0", "zero");
-    check(bigint_to_string(bigint_init("0000")) == "0", "leading zeros");
-    check(bigint_to_string(bigint_init("ABCDEF")) == "abcdef", "uppercase");
-    check(bigint_to_string(bigint_init("123")) == "123", "odd length");
+    check(bigint_to_string(bigint_init("0")) == "0", "zero value");
+    check(bigint_to_string(bigint_init("00000")) == "0", "extra zeros");
+    check(bigint_to_string(bigint_init("D4E5F6")) == "d4e5f6", "uppercase hex");
+    check(bigint_to_string(bigint_init("2468a")) == "2468a", "odd digits");
 
-    check(bigint_to_string(bigint_init("ab54a98ceb1f0ad2")) ==
-          "ab54a98ceb1f0ad2", "large number");
+    check(bigint_to_string(bigint_init("c3a7b9d2e4f618")) ==
+          "c3a7b9d2e4f618", "large value");
 
-    check(bigint_to_string(bigint_init(string(512, 'f'))) ==
-          string(512, 'f'), "2048 bits");
+    check(bigint_to_string(bigint_init(string(512, 'd'))) ==
+          string(512, 'd'), "maximum size");
 
     try {
         bigint_init("");
-        check(false, "empty input");
+        check(false, "empty string");
     }
     catch (...) {
-        check(true, "empty input");
+        check(true, "empty string");
     }
 
     try {
-        bigint_init("xyz");
-        check(false, "invalid characters");
+        bigint_init("gh!");
+        check(false, "non-hex characters");
     }
     catch (...) {
-        check(true, "invalid characters");
+        check(true, "non-hex characters");
     }
 
     try {
-        bigint_init("1" + string(512, '0'));
-        check(false, "number too large");
+        bigint_init("2" + string(512, '0'));
+        check(false, "oversized input");
     }
     catch (...) {
-        check(true, "number too large");
+        check(true, "oversized input");
     }
 }
 
 void test_multiply() {
-    check(bigint_to_string(bigint_multiply(bigint_init("2"), bigint_init("3"))) == "6",
-          "2 * 3");
+    check(bigint_to_string(bigint_multiply(bigint_init("4"), bigint_init("5"))) == "14",
+          "4 * 5");
 
-    check(bigint_to_string(bigint_multiply(bigint_init("0"), bigint_init("abc"))) == "0",
-          "zero multiplication");
+    check(bigint_to_string(bigint_multiply(bigint_init("0"), bigint_init("def"))) == "0",
+          "multiplication by zero");
 
-    check(bigint_to_string(bigint_multiply(bigint_init("1"), bigint_init("abc"))) == "abc",
-          "multiply by one");
+    check(bigint_to_string(bigint_multiply(bigint_init("1"), bigint_init("def"))) == "def",
+          "multiplication by one");
 
-    check(bigint_to_string(bigint_multiply(bigint_init("ff"), bigint_init("ff"))) == "fe01",
-          "ff * ff");
+    check(bigint_to_string(bigint_multiply(bigint_init("ee"), bigint_init("ee"))) == "dd44",
+          "ee * ee");
 
-    check(bigint_to_string(bigint_multiply(bigint_init("100"), bigint_init("100"))) == "10000",
-          "100 * 100");
+    check(bigint_to_string(bigint_multiply(bigint_init("120"), bigint_init("120"))) == "14400",
+          "120 * 120");
 }
 
 void test_cases(string filename) {

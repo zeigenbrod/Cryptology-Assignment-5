@@ -1,9 +1,8 @@
-
 import random
 import sys
 
 MAX_BITS = 2048
-random.seed(12345)
+random.seed(12222)
 
 
 def expected(a, b):
@@ -30,7 +29,6 @@ def make_hex(number):
 def main():
     tests = []
 
-    # test some known numbers
     numbers = [
         0, 1, 2, 255, 256, 65535, 65536,
         (1 << 64) - 1, 1 << 64,
@@ -43,8 +41,8 @@ def main():
         for b in numbers:
             tests.append((a, b))
 
-    # test random numbers
-    count = int(sys.argv[1]) if len(sys.argv) > 1 else 2000
+    #random nums test
+    count = int(sys.argv[1]) 
 
     for i in range(count):
         bits_a = random.randint(1, MAX_BITS)
@@ -55,7 +53,7 @@ def main():
 
         tests.append((a, b))
 
-    # test random numbers that usually fit
+   
     for i in range(count):
         bits_a = random.randint(1, MAX_BITS)
         bits_b = random.randint(1, MAX_BITS - bits_a + 1)
@@ -65,7 +63,7 @@ def main():
 
         tests.append((a, b))
 
-    # test the benchmark sizes
+
     for bits in [256, 512, 1024]:
         for i in range(100):
             a = random.getrandbits(bits) | (1 << (bits - 1))
@@ -73,7 +71,6 @@ def main():
 
             tests.append((a, b))
 
-    # print the test numbers and expected answers
     for a, b in tests:
         print(make_hex(a), make_hex(b), expected(a, b))
 
